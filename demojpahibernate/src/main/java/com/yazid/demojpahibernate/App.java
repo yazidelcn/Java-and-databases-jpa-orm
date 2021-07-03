@@ -27,7 +27,7 @@ public class App
     	e1.setTest("blabla");*/
     	
     	
-    	
+    	/*
     	Employee e2 =  new Employee();
     	e2.setName("John Doe");
     	e2.setAge(46);
@@ -42,18 +42,32 @@ public class App
     	e3.setSsn("fakessn003");
     	e3.setType(EmployeeType.FULL_TIME);
     	
-    	
-    	
+    	*/
+    	/*
+    	Employee e4 =  new Employee();
+    	e4.setName("Ronald \"Mac\" McDonald");
+    	e4.setAge(32);
+    	e4.setDateOfBirth(new Date());
+    	e4.setSsn("fakessn004");
+    	e4.setType(EmployeeType.FULL_TIME);*/
+    
     	
     	
     	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistence");
     	EntityManager entityManager = entityManagerFactory.createEntityManager();
     	EntityTransaction transaction = entityManager.getTransaction();
     	transaction.begin();
+    	
+    	Employee employee_4 = entityManager.find(Employee.class, 4L);
+    	employee_4.setName("MAC");
+    	employee_4.setType(EmployeeType.CONTRACTOR);
     	//entityManager.persist(e1);
-    	entityManager.persist(e2);
-    	entityManager.persist(e3);
+    	//entityManager.persist(e2);
+    	entityManager.persist(employee_4);
     	transaction.commit();
+    	
+    	//Employee employee_1 = entityManager.find(Employee.class, 1L);
+    	//Employee employee_3 = entityManager.find(Employee.class, 3L);
     	entityManager.close();
     	entityManagerFactory.close();
     	
