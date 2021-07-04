@@ -6,9 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,7 +38,10 @@ public class Employee {
 	
 	@Transient
 	private String test;
-
+	
+	@OneToOne
+	private AccessCard card;
+	
 	public Long getId() {
 		return id;
 	}
@@ -93,18 +98,22 @@ public class Employee {
 		this.test = test;
 	}
 
+
+	public AccessCard getCard() {
+		return card;
+	}
+
+	public void setCard(AccessCard card) {
+		this.card = card;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + ", age=" + age + ", type=" + type + ", dateOfBirth="
-				+ dateOfBirth + ", ssn=" + ssn + "]";
+				+ dateOfBirth + ", ssn=" + ssn + ", test=" + test + ", card=" + card + "]";
 	}
+
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }
