@@ -1,15 +1,17 @@
 package com.yazid.demojpahibernate.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -41,6 +43,9 @@ public class Employee {
 	
 	@OneToOne
 	private AccessCard card;
+	@OneToMany(mappedBy = "employee")
+	private List<PayStub> payStubs = new ArrayList<>();
+	
 	
 	public Long getId() {
 		return id;
@@ -106,12 +111,29 @@ public class Employee {
 	public void setCard(AccessCard card) {
 		this.card = card;
 	}
+	
+	
+	
+	public List<PayStub> getPayStubs() {
+		return payStubs;
+	}
+
+	public void setPayStubs(List<PayStub> payStubs) {
+		this.payStubs = payStubs;
+	}
+	
+	
+	public void addPayStub(PayStub paystub) {
+		this.payStubs.add(paystub);
+	}
 
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + ", age=" + age + ", type=" + type + ", dateOfBirth="
-				+ dateOfBirth + ", ssn=" + ssn + ", test=" + test + ", card=" + card + "]";
+				+ dateOfBirth + ", ssn=" + ssn + ", test=" + test + ", card=" + card + ", payStubs=" + payStubs + "]";
 	}
+
+	 
 
 	
 

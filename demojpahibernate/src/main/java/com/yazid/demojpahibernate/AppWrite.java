@@ -1,6 +1,7 @@
 package com.yazid.demojpahibernate;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,6 +11,7 @@ import javax.persistence.Persistence;
 import com.yazid.demojpahibernate.entities.AccessCard;
 import com.yazid.demojpahibernate.entities.Employee;
 import com.yazid.demojpahibernate.entities.EmployeeType;
+import com.yazid.demojpahibernate.entities.PayStub;
 
 /**
  * Hello world!
@@ -54,6 +56,24 @@ public class AppWrite
     	e2.setCard(card2);
     	
     	
+    	
+    	PayStub p1 = new PayStub();
+    	p1.setPayPeriodStart(new Date());
+    	p1.setPayPeriodEnd(new Date());
+    	p1.setSalary(5000);
+    	p1.setEmployee(e1);
+    	e1.addPayStub(p1);
+    	
+    	PayStub p2 = new PayStub();
+    	p2.setPayPeriodStart(new Date());
+    	p2.setPayPeriodEnd(new Date());
+    	p2.setSalary(7500);
+    	p2.setEmployee(e1);
+    	e1.addPayStub(p2);
+    	
+    	//e1.setPayStubs(List.of(p1,p2));
+    	
+    	
     	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistence");
     	EntityManager entityManager = entityManagerFactory.createEntityManager();
     	EntityTransaction transaction = entityManager.getTransaction();
@@ -66,6 +86,8 @@ public class AppWrite
     	entityManager.persist(e2);
     	entityManager.persist(card1);
     	entityManager.persist(card2);
+    	entityManager.persist(p1);
+    	entityManager.persist(p2);
     	transaction.commit();
     	
     	//Employee employee_1 = entityManager.find(Employee.class, 1L);
