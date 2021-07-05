@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,6 +25,8 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="EMPLOYEE_DATA")
+@NamedQuery(query="select e from Employee e order by e.age desc", name="emp age desc")
+@NamedQuery(query="select e from Employee e where e.age = :age", name="emp by age")
 public class Employee {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
