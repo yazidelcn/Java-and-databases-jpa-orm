@@ -11,6 +11,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -45,6 +48,13 @@ public class Employee {
 	private AccessCard card;
 	@OneToMany(mappedBy = "employee")
 	private List<PayStub> payStubs = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinTable(name = "EMAIL_GROUP_SUBSCRIPTIONS",
+		joinColumns = @JoinColumn(name = "EMPLOYEE_ID"),
+		inverseJoinColumns = @JoinColumn(name="SUBSCRIPTION_EMAIL_ID")
+			)
+	private List<EmailGroup> emailGroups = new ArrayList<>();
 	
 	
 	public Long getId() {
@@ -126,7 +136,12 @@ public class Employee {
 	public void addPayStub(PayStub paystub) {
 		this.payStubs.add(paystub);
 	}
-
+	
+	
+	public void addEmailGroup(EmailGroup emailGroup) {
+		this.emailGroups.add(emailGroup);
+	}
+	
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + ", age=" + age + ", type=" + type + ", dateOfBirth="

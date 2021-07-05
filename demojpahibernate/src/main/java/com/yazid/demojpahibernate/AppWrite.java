@@ -9,6 +9,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import com.yazid.demojpahibernate.entities.AccessCard;
+import com.yazid.demojpahibernate.entities.EmailGroup;
 import com.yazid.demojpahibernate.entities.Employee;
 import com.yazid.demojpahibernate.entities.EmployeeType;
 import com.yazid.demojpahibernate.entities.PayStub;
@@ -73,6 +74,19 @@ public class AppWrite
     	
     	//e1.setPayStubs(List.of(p1,p2));
     	
+    	EmailGroup group1 = new EmailGroup();
+    	group1.setName("Group 1");
+    	group1.addEmployee(e1);
+    	group1.addEmployee(e2);
+    	e1.addEmailGroup(group1);
+    	e2.addEmailGroup(group1);
+    	
+    	
+    	EmailGroup group2 = new EmailGroup();
+    	group2.setName("Group 2");
+    	group2.addEmployee(e1);
+    	e1.addEmailGroup(group2);
+    	
     	
     	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myPersistence");
     	EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -88,6 +102,8 @@ public class AppWrite
     	entityManager.persist(card2);
     	entityManager.persist(p1);
     	entityManager.persist(p2);
+    	entityManager.persist(group1);
+    	entityManager.persist(group2);
     	transaction.commit();
     	
     	//Employee employee_1 = entityManager.find(Employee.class, 1L);
